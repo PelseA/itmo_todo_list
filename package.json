@@ -1,0 +1,25 @@
+{
+  "name": "lesson2-intro-html",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "cypress": "^10.10.0",
+    "prettier": "^2.7.1",
+    "tailwindcss": "^3.1.8",
+    "vite": "^3.1.0"
+  },
+  "prettier": {
+    "printWidth": 120,
+    "singleQuote": true
+  },
+  "dependencies": {
+    "@spectrum-web-components/bundle": "^0.27.3",
+    "carbon-web-components": "^1.21.0"
+  }
+}
