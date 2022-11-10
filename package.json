@@ -4,10 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --mode dev",
     "build": "vite build",
     "preview": "vite preview",
-    "vitestui": "vitest --ui"
+    "vitestui": "vitest --ui",
+    "cy:open": "yarn dev",
+    "cy:run": "yarn dev"
   },
   "devDependencies": {
     "@vitest/ui": "^0.25.1",
