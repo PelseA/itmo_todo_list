@@ -1,39 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <!--<link href="/dist/output.css" rel="stylesheet">-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!--<script type="module" src="spectrum.js"></script>-->
-    <title>Vite App</title>
-  </head>
-  <body>
-    <div id="app">
-      <sp-theme scale="large" color="dark">
-        <!-- Insert content requiring theme application here. -->
-        <sp-button onclick="alert('I was clicked');">Click me!</sp-button>
-        <!-- End content requiring theme application. -->
-      </sp-theme>
-      <sp-button-group>
-        <sp-button variant="primary">Normal</sp-button>
-        <sp-button variant="primary" disabled>Disabled</sp-button>
-      </sp-button-group>
-      <sp-field-label for="name-0">Name</sp-field-label>
-      <sp-textfield id="name-0" placeholder="Enter your name"></sp-textfield>
-      <sp-button-group style="min-width: max-content">
-        <sp-button treatment="fill" variant="primary">Primary, Fill</sp-button>
-        <sp-button treatment="fill" variant="secondary">Secondary, Fill</sp-button>
-        <sp-button treatment="fill" variant="negative">Negative, Fill</sp-button>
-      </sp-button-group>
-    </div>
-    <div app="#myTodoList">
-      <h1>TODO LIST</h1>
-      <input type="text" id="inpTodoTitle" />
-      <button type='button' id="btnCreateTodo">Create</button>
-      <ol id="listOfTodos"></ol>
-    </div>
+<html lang="ru">
+<head>
+  <title>Parcel Sandbox</title>
+  <meta charset="UTF-8" />
+</head>
 
-    <script type="module" src="main.js"></script>
-  </body>
+<body>
+<div id="app"></div>
+<input id="inpTodoTitle" />
+<button class='btn' id="btnCreateTodo">Create</button>
+<ol CLASS='li' id="listOfTodos"></ol>
+<script type="module" src="main.js"></script>
+</body>
 </html>

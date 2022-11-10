@@ -1,8 +1,14 @@
-function localStorageListOf(key, defaultValue = []) {
+function localStorageListOf(key, defaultValue= []) {
   const value = localStorage.getItem(key);
-  if (value === null) return defaultValue;
+  console.log('> localStorageListOf: value =', value);
+  if (value === null) return [];
+
   const parsedValue = JSON.parse(value);
-  return Array.isArray(parsedValue) ? parsedValue : defaultValue;
+  const isParsedValueArray = Array.isArray(parsedValue);
+  return isParsedValueArray ? parsedValue : defaultValue;
+}
+function localStorageSaveListOfWithKey(key, list){
+  localStorage.setItem(key, JSON.stringify(list));
 }
 
-export {localStorageListOf};
+export { localStorageListOf, localStorageSaveListOfWithKey}
