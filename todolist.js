@@ -1,13 +1,28 @@
+/* build последовательно выполнили команды
+npm i -g simple-server
+yarn build
+cd dist/
+simple-server
+* */
 import TodoVO from './src/model/vos/TodoVO.js';
 import { disableButtonWhenTextInvalid } from './src/utils/domUtils.js';
 import { isStringNotNumberAndNotEmpty } from './src/utils/stringUtils.js';
-import { localStorageListOf, localStorageSaveListOfWithKey} from './src/utils/databaseUtils.js';
+import { localStorageListOf, localStorageSaveListOfWithKey } from './src/utils/databaseUtils.js';
 import TodoView from './src/view/TodoView.js';
 
 export function myTodoList(element) {
   const domInpTodoTitle = document.getElementById('inpTodoTitle');
   const domBtnCreateTodo = document.getElementById('btnCreateTodo');
   const domListOfTodos = document.getElementById('listOfTodos');
+
+  // сохраняем ссылку на console.log в константу
+  const debug = console.log;
+  // перезаписываем функцию
+  /*console.log = (msg, ...args) => {
+    //if (import.meta.env.PROD === false) debug(msg);
+    if (!import.meta.env.DEV) debug(msg, ...args);
+  };*/
+  // про переменные среды vite, например про import.meta.env., можно посмотреть в документации vite
 
   let selectedTodoVO = null;
   let selectedTodoViewItem = null;
@@ -28,6 +43,20 @@ export function myTodoList(element) {
   domInpTodoTitle.value = localStorage.getItem(LOCAL_INPUT_TEXT);
   render_TodoListInContainer(listOfTodos, domListOfTodos);
   disableOrEnable_CreateTodoButtonOnTodoInputTitle();
+
+  //промисы Promise
+  //после функции resolve сработает then, можно из then возвращать что-то
+  //после функции reject сработает catch
+  //finally опционально и не обязательно последний
+  const delay = (time) =>
+    new Promise((resolve, reject) => {
+      console.log('>delay -> Promise created');
+      setTimeout(() => {
+        console.log('Promise setTimeOut');
+        resolve(time);
+        //resolve();
+      }, time);
+    });
 
   function onTodoDomItemClicked(event) {
     const domElement = event.target;
@@ -62,19 +91,36 @@ export function myTodoList(element) {
     }
   }
 
-  function onBtnCreateTodoClick(event) {
+  //async - при каждом выполнении ф-я возвращает промис
+  async function onBtnCreateTodoClick(event) {
     // console.log('> domBtnCreateTodo -> handle(click)', this.attributes);
     const todoTitle_Value_FromDomInput = domInpTodoTitle.value;
     // console.log('> domBtnCreateTodo -> todoInputTitleValue:', todoTitleValueFromDomInput);
-
     const isStringValid = isStringNotNumberAndNotEmpty(todoTitle_Value_FromDomInput);
-
+    //await останавливает выполнение дальнейшего кода до выполнения promise
     if (isStringValid) {
+      const result = await delay(1000).then((param) => {
+        console.log('> param из resolve -> ', param);
+        return {time: param * 2};
+      });
+      /*const result = await delay(1000)
+        .then((param) => {
+          console.log('> param из resolve -> ', param);
+          return param ? param : 0;
+        })
+        .then((param) => {
+          console.log('> param * 2 из resolve -> ', param * 2);
+          return `time = ${param}`;
+        });*/
+      console.log('result -> ', result);
+      //синтаксис, если не добавили к ф-ии async
+      //delay(1000).then(() => {
       create_TodoFromTextAndAddToList(todoTitle_Value_FromDomInput, listOfTodos);
       clear_InputTextAndLocalStorage();
       save_ListOfTodo();
       render_TodoListInContainer(listOfTodos, domListOfTodos);
       disableOrEnable_CreateTodoButtonOnTodoInputTitle();
+      //});
     }
   }
 

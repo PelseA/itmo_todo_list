@@ -1,6 +1,6 @@
 describe('empty spec', () => {
   before(() => {
-    cy.visit('http://localhost:8089');
+    cy.visit('http://localhost:8081');
   });
 
   it('goto index page enter todo text and press create', () => {
